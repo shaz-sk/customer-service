@@ -51,3 +51,4 @@
 5. Externalised error messages
 6. Integration testing
 7. Linting
+8. Just realised that I haven't followed naming convention for exception folder. Leaving as such due to lack of time. 
