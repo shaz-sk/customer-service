@@ -1,11 +1,11 @@
-## Design Assumptions
+## Design considerations
 
 1. When admin retrieves of all phone numbers they would like to know the customer to whom those numbers belong.
-2. Ideally would have implemented id in the second api to get a customers details.
+2. Need to design with a customer id to get a customers details.
 
 ## To run
 
-1. ```./gradlew bootRun.```
+1. ```./gradlew bootRun.``` If you get access denied, run chmod 755 gradlew
 2. To get debug logs, in resources/application.properties, please set logging.level.com.belong.customer to DEBUG
 3. For API calls, in postman.
    ```  
@@ -40,11 +40,11 @@
 10. Need to add more Unit test
 11. Validated get request based on authenticated user
 
-#What could have been done better?
+# What could have been done better?
 1. Couldnt implement security for PUT request due to lack of time
 2. Add pagination for retrieving all customer data
 3. Add Tracing, profile specific logging for prod and easy log access for support
 4. Add more unit testing. Please refer PhoneValidatorTest, PhoneServiceTest as a sample
-5. externalised error messages
-6. integration testing
+5. Externalised error messages
+6. Integration testing
 7. Linting
