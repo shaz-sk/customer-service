@@ -1,0 +1,13 @@
+{
+  "apiPackage" : "com.belong.customer.api",
+  "modelPackage": "com.belong.customer.models",
+  "invokerPackage": "com.belong.customer",
+  "configPackage": "com.belong.customer",
+  "library": "spring-boot",
+  "dateLibrary": "java8",
+  "useTags": true,
+  "delegatePattern": true,
+  "hideGenerationTimestamp": true,
+  "generateApiTests": true,
+  "generateModelTests": false
+}

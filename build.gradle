@@ -1,0 +1,106 @@
+buildscript {
+    ext {
+        springBootVersion = '2.5.4'
+        lombokVersion = '1.18.20'
+        openpojoVersion= '0.8.13'
+        swaggerCoreVersion = '1.5.18'
+        springFoxVersion= '2.8.0'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+plugins {
+    id("org.springframework.boot") version "2.3.4.RELEASE"
+    id("io.spring.dependency-management") version "1.0.10.RELEASE"
+    id("java")
+    id 'org.hidetake.swagger.generator' version '2.19.1'
+}
+
+group = 'com.example.origincodesample'
+version = '0.0.1-SNAPSHOT'
+java.sourceCompatibility = JavaVersion.VERSION_11
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    mapstruct
+}
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation ('org.springframework.boot:spring-boot-starter')
+    implementation('org.springframework.boot:spring-boot-devtools')
+    implementation('org.springframework.boot:spring-boot-starter-validation')
+    implementation('org.springframework.boot:spring-boot-starter-security')
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.13.1'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+    implementation 'org.projectlombok:lombok:1.18.18'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.1.0'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+    mapstruct( 'org.mapstruct:mapstruct-processor:1.4.2.Final' )
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+
+    //dependency for generated sources - begin
+    swaggerCodegen 'org.openapitools:openapi-generator-cli:5.4.0'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.11.2'
+    implementation "io.swagger:swagger-annotations:${swaggerCoreVersion}"
+    implementation "io.springfox:springfox-swagger-ui:${springFoxVersion}"
+    implementation "io.springfox:springfox-swagger2:${springFoxVersion}"
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.1'
+    implementation 'org.openapitools:jackson-databind-nullable:0.1.0'
+    implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+    implementation group: 'io.swagger.core.v3', name: 'swagger-annotations', version: '2.0.0'
+    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.13.1'
+    //dependency for generated sources - end
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+    testImplementation "com.openpojo:openpojo:${openpojoVersion}"
+}
+
+def inputSwagger = file('src/main/resources/openapi.yaml')
+def generatedSources = file('build/generated/classes')
+swaggerSources {
+    exchangeClients {
+        inputFile = inputSwagger
+        code {
+            language = 'spring'
+            outputDir = generatedSources
+            configFile = file('src/main/resources/config.json')
+        }
+    }
+}
+
+springBoot {
+    mainClassName = 'com.belong.customer.CustomerApplication'
+}
+
+compileJava {
+    options.compilerArgs += [
+            '-Amapstruct.defaultComponentModel=spring'
+    ]
+}
+
+
+
+processResources.dependsOn generateSwaggerCodeExchangeClients
+compileJava.dependsOn swaggerSources.exchangeClients.code
+sourceSets.main.java.srcDir "${generatedSources}/src/main/java"
+sourceSets.main.java.srcDir "${generatedSources}/sources/annotationProcessor"
+
+test {
+    useJUnitPlatform()
+}

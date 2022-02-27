@@ -1,0 +1,140 @@
+openapi: 3.0.1
+info:
+  title: Contact Details
+  description: Contact Details
+  version: 1.0.0
+servers:
+  - url: /api
+tags:
+  - name: contact Details
+paths:
+  /v1/customers/contactDetails:
+    get:
+      tags:
+        - contact Details
+      summary: Get all phone number
+      operationId: getContactDetails
+      responses:
+        400:
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactDetails'
+  /v1/customers/{firstName}/contactDetails:
+    get:
+      tags:
+        - contact Details
+      summary: Get phone number of one customer
+      operationId: getCustomerDetails
+      parameters:
+        - in: path
+          name: firstName
+          schema:
+            type: string
+          required: true
+          description: First name of the user to get
+          example: 'Joe'
+      responses:
+        400:
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+  /v1/customers/{firstName}/contactDetail:
+    put:
+      tags:
+        - contact Details
+      summary: Activate a phone number
+      operationId: updatePhoneStatus
+      parameters:
+        - in: path
+          name: firstName
+          schema:
+            type: string
+          required: true
+          description: First name of the user to get
+          example: 'Joe'
+      requestBody:
+        description: Update status
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Phone'
+      responses:
+        400:
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Phone'
+      x-codegen-request-body-name: body
+components:
+  schemas:
+    ContactDetails:
+      type: object
+      properties:
+        customers:
+          type: array
+          description: customer details
+          items:
+            $ref: '#/components/schemas/Customer'
+    Customer:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: 'Joe'
+        lastName:
+          type: string
+          example: 'K'
+        phoneNumbers:
+          type: array
+          description: contact details
+          items:
+            $ref: '#/components/schemas/Phone'
+    Phone:
+      type: object
+      properties:
+        phoneNumber:
+          type: string
+          example: '6140000000000'
+        active:
+          type: boolean
+          example: true
+      required:
+        - phoneNumber
+        - active
+    Error:
+      type: object
+      description: A specific error
+      properties:
+        code:
+          type: string
+          description: Code form of the error
+        message:
+          type: string
+          description: Human readable form of the error
+      required:
+        - code
+        - message
+
