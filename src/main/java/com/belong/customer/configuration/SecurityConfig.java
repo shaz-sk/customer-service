@@ -1,6 +1,6 @@
 package com.belong.customer.configuration;
 
-import io.swagger.models.HttpMethod;
+import org.springframework.http.HttpMethod;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -38,8 +38,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers(String.valueOf(HttpMethod.PUT), "/api/v1/customers/**")
-                .permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/v1/customers/**")
+                .hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()

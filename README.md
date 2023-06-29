@@ -8,8 +8,9 @@
 7. Spring Validator used to validate business requirements. Could externalise the message.
 8. Service classes were used to do the business logic
 9. Exception Handler was used standardise the exception handling
-10. Added docker for consitency and portabiltiy.   
-11. Validated get requests based on authenticated user
+10.Integration tests using MockMvc
+11. Added docker for consistency and portability.   
+11. Validated GET requests based on authenticated user and PUT request based on the role of authenticated user.
 
 ## Design considerations
 
@@ -32,6 +33,11 @@
    ```
    PUT http://localhost:8080/api/v1/customers/Joe1/contactDetail
    Content-Type header as application/json in Header tab
+   with basic authentication credentials (admin1/admin1)
+   {
+    "phoneNumber" : "0400000000",
+    "active" : true
+   }
    ```
    ```
    GET http://localhost:8080/actuator/health
@@ -44,11 +50,9 @@
 
 
 ## What could have been done better?
-1. Couldnt implement security for PUT request due to lack of time
-2. Add pagination for retrieving all customer data
-3. Add Tracing, profile specific logging for prod and easy log access for support
-4. Add more unit testing. Please refer PhoneValidatorTest, PhoneServiceTest as a sample
-5. Externalised error messages
-6. Integration testing
-7. Linting
-8. Just realised that I haven't followed naming convention for exception folder. Leaving as such due to lack of time. 
+1. Add pagination for retrieving all customer data
+2. Add Tracing, profile specific logging for prod and easy log access for support
+3. Add more unit testing. Please refer PhoneValidatorTest, PhoneServiceTest as a sample
+4. Externalised error messages
+5. 
+6. Linting

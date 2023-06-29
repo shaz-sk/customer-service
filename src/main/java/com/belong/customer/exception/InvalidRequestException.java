@@ -1,4 +1,4 @@
-package com.belong.customer.Exception;
+package com.belong.customer.exception;
 
 import org.springframework.validation.Errors;
 

@@ -1,6 +1,6 @@
 package com.belong.customer.delegate;
 
-import com.belong.customer.Exception.InvalidRequestException;
+import com.belong.customer.exception.InvalidRequestException;
 import com.belong.customer.api.ContactDetailsApiDelegate;
 import com.belong.customer.dto.CustomerDto;
 import com.belong.customer.data.TestData;

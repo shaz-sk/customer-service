@@ -1,4 +1,4 @@
-package com.belong.customer.Exception;
+package com.belong.customer.exception;
 
 import com.belong.customer.models.Error;
 import lombok.extern.slf4j.Slf4j;
