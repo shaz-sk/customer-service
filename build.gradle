@@ -1,9 +1,9 @@
 buildscript {
     ext {
-        springBootVersion = '2.5.4'
+        springBootVersion = '2.6.6'
         lombokVersion = '1.18.20'
         openpojoVersion= '0.8.13'
-        swaggerCoreVersion = '1.5.18'
+        swaggerCoreVersion = '2.0.0'
         springFoxVersion= '2.8.0'
     }
     repositories {
@@ -34,12 +34,12 @@ configurations {
 }
 
 dependencies {
-    implementation('org.springframework.boot:spring-boot-starter-web')
-    implementation ('org.springframework.boot:spring-boot-starter')
-    implementation('org.springframework.boot:spring-boot-devtools')
-    implementation('org.springframework.boot:spring-boot-starter-validation')
-    implementation('org.springframework.boot:spring-boot-starter-security')
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.13.1'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.1'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.mapstruct:mapstruct:1.4.2.Final'
     implementation 'org.projectlombok:lombok:1.18.18'
@@ -54,20 +54,19 @@ dependencies {
     swaggerCodegen 'org.openapitools:openapi-generator-cli:5.4.0'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.11.2'
-    implementation "io.swagger:swagger-annotations:${swaggerCoreVersion}"
     implementation "io.springfox:springfox-swagger-ui:${springFoxVersion}"
     implementation "io.springfox:springfox-swagger2:${springFoxVersion}"
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.1'
     implementation 'org.openapitools:jackson-databind-nullable:0.1.0'
-    implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
-    implementation group: 'io.swagger.core.v3', name: 'swagger-annotations', version: '2.0.0'
-    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.13.1'
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+    implementation "io.swagger.core.v3:swagger-annotations:${swaggerCoreVersion}"
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.1'
     //dependency for generated sources - end
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.7.2"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:5.7.2"
     testImplementation "com.openpojo:openpojo:${openpojoVersion}"
 }
 
@@ -85,7 +84,7 @@ swaggerSources {
 }
 
 springBoot {
-    mainClassName = 'com.belong.customer.CustomerApplication'
+    mainClass = 'com.belong.customer.CustomerApplication'
 }
 
 compileJava {
