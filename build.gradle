@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.6.6'
+        springBootVersion = '2.7.12'
         lombokVersion = '1.18.20'
         openpojoVersion= '0.8.13'
         swaggerCoreVersion = '2.0.0'
