@@ -1,8 +1,8 @@
 {
-  "apiPackage" : "com.belong.customer.api",
-  "modelPackage": "com.belong.customer.models",
-  "invokerPackage": "com.belong.customer",
-  "configPackage": "com.belong.customer",
+  "apiPackage" : "com.organization.customer.api",
+  "modelPackage": "com.organization.customer.models",
+  "invokerPackage": "com.organization.customer",
+  "configPackage": "com.organization.customer",
   "library": "spring-boot",
   "dateLibrary": "java8",
   "useTags": true,
