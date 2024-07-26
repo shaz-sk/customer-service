@@ -37,14 +37,12 @@ public class PhoneValidator implements org.springframework.validation.Validator 
 
         if(customer.isPresent()) {
             Optional<Phone> phone = customer.get().getPhoneNumbers().stream()
-                    .filter(p -> p.getPhoneNumber().equals(phoneNumber)).findFirst();
-            if(!phone.isPresent()) {
-                errors.reject("102", "Phone number does not belong to the user");
-                return;
+                    .filter(phoneRecord -> phoneRecord.getPhoneNumber().equals(phoneNumber)).findFirst();
+            if(phone.isEmpty()) {
+                errors.reject("102", "Unable to activate");
             }
         } else {
-            errors.reject("102", "Phone number does not belong to the user");
-            return;
+            errors.reject("102", "Unable to activate");
         }
 
 

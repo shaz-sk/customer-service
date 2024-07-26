@@ -11,14 +11,13 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.validation.BindException;
 
-import java.util.Arrays;
+import java.util.List;
 
 import static org.mockito.Mockito.doReturn;
 
 @ExtendWith(MockitoExtension.class)
 public class PhoneValidatorTest {
     @InjectMocks
-    @Spy
     private PhoneValidator phoneValidator;
 
     @Spy
@@ -38,7 +37,7 @@ public class PhoneValidatorTest {
     @Test
     public void validatePhonenumberLength() {
         Phone phone = new Phone().phoneNumber("123456789").active(false);
-        requestDTO = new CustomerDto("Joe","wood", Arrays.asList(phone));
+        requestDTO = new CustomerDto("Joe","wood", List.of(phone));
         errors = new BindException(requestDTO, "CustomerDto");
         phoneValidator.validate(requestDTO, errors);
         Assertions.assertThat(errors.hasErrors()).isTrue();
@@ -47,11 +46,11 @@ public class PhoneValidatorTest {
     @Test
     public void validateInvalidPhonenumber() {
         Phone phone1 = new Phone().phoneNumber("1234567890").active(false);
-        requestDTO = new CustomerDto("Joe","wood", Arrays.asList(phone1));
+        requestDTO = new CustomerDto("Joe","wood", List.of(phone1));
         errors = new BindException(requestDTO, "CustomerDto");
 
         Phone phone2 = new Phone().phoneNumber("1234567891").active(false);
-        doReturn(Arrays.asList(new CustomerDto("Joe","wood", Arrays.asList(phone2)))).when(customerData).getCustomers();
+        doReturn(List.of(new CustomerDto("Joe", "wood", List.of(phone2)))).when(customerData).getCustomers();
 
         phoneValidator.validate(requestDTO, errors);
         Assertions.assertThat(errors.hasErrors()).isTrue();
@@ -60,22 +59,22 @@ public class PhoneValidatorTest {
     @Test
     public void validateInvalidCustomer() {
         Phone phone1 = new Phone().phoneNumber("1234567890").active(false);
-        requestDTO = new CustomerDto("Joe","wood", Arrays.asList(phone1));
+        requestDTO = new CustomerDto("Joe","wood", List.of(phone1));
         errors = new BindException(requestDTO, "CustomerDto");
 
-        doReturn(Arrays.asList(new CustomerDto("Joe1","wood", Arrays.asList(phone1)))).when(customerData).getCustomers();
+        doReturn(List.of(new CustomerDto("Joe1", "wood", List.of(phone1)))).when(customerData).getCustomers();
 
         phoneValidator.validate(requestDTO, errors);
         Assertions.assertThat(errors.hasErrors()).isTrue();
     }
 
     @Test
-    public void validatePhonenumber() {
+    public void validatePhoneNumber() {
         Phone phone = new Phone().phoneNumber("1234567890").active(false);
-        requestDTO = new CustomerDto("Joe","wood", Arrays.asList(phone));
+        requestDTO = new CustomerDto("Joe","wood", List.of(phone));
         errors = new BindException(requestDTO, "CustomerDto");
 
-        doReturn(Arrays.asList(requestDTO)).when(customerData).getCustomers();
+        doReturn(List.of(requestDTO)).when(customerData).getCustomers();
         phoneValidator.validate(requestDTO, errors);
         Assertions.assertThat(errors.hasErrors()).isFalse();
     }

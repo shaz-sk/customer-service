@@ -23,7 +23,7 @@ plugins {
 
 group = 'com.example.origincodesample'
 version = '0.0.1-SNAPSHOT'
-java.sourceCompatibility = JavaVersion.VERSION_11
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
@@ -84,7 +84,7 @@ swaggerSources {
 }
 
 springBoot {
-    mainClass = 'com.belong.customer.CustomerApplication'
+    mainClass = 'com.organization.customer.CustomerApplication'
 }
 
 compileJava {

@@ -17,14 +17,14 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public UserDetailsService userDetailsService(BCryptPasswordEncoder passwordEncoder) {
+    public UserDetailsService userDetailsService() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         manager.createUser(User.withUsername("Joe1")
-                .password(passwordEncoder.encode("Joe1"))
+                .password("$2a$10$9qdY6XiOaWPajZKNgHNnHed79rS4LhWFOAIgTFyNvR10MfyIu.9hS")
                 .roles("USER")
                 .build());
         manager.createUser(User.withUsername("admin1")
-                .password(passwordEncoder.encode("admin1"))
+                .password("$2a$10$OLFK4djO9E0sDp6osC1kW.NIuPAb8DPuhUKSDskNKvIl7eHaEgwOm")
                 .roles("USER", "ADMIN")
                 .build());
         return manager;
@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .and()
                 .httpBasic().and()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);;
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         return http.build();
     }
 }

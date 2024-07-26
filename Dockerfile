@@ -1,4 +1,4 @@
-FROM openjdk:11-jdk-slim as builder
+FROM eclipse-temurin:17-jdk-jammy as builder
 
 RUN mkdir /customer-service
 WORKDIR /customer-service

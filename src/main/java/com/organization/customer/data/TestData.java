@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -26,8 +25,8 @@ public class TestData {
         Phone phone3 = new Phone().phoneNumber("0400000003").active(false);
         Phone phone4 = new Phone().phoneNumber("0400000004").active(true);
 
-        CustomerDto customer1 = new CustomerDto("Joe1", "Smith", Arrays.asList(phone1, phone2));
-        CustomerDto customer2 = new CustomerDto("Joe2", "Smith", Arrays.asList(phone3, phone4));
+        CustomerDto customer1 = new CustomerDto("Joe1", "Smith", List.of(phone1, phone2));
+        CustomerDto customer2 = new CustomerDto("Joe2", "Smith", List.of(phone3, phone4));
         customers.add(customer1);
         customers.add(customer2);
     }

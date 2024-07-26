@@ -22,8 +22,7 @@ public class AccessValidator implements org.springframework.validation.Validator
         String role = authentication.getAuthorities().iterator().next().toString();
 
         if(!loggedInUser.equals(firstName) && !role.equals("ROLE_ADMIN")){
-            errors.reject("100", "Access Denied");
-            return;
+            errors.reject("100", "Requested information unavailable");
         }
 
     }

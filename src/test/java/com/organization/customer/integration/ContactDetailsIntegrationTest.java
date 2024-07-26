@@ -27,12 +27,13 @@ public class ContactDetailsIntegrationTest {
     @Test
     public void updateCustomer () throws Exception {
 
-        mvc.perform(put("http://localhost:"+randomServerPort+"/api/v1/customers/Joe1/contactDetail")
+        mvc.perform(put("http://localhost:"+randomServerPort+"/api/v1/customers/Joe1/contactDetails")
             .contentType(MediaType.APPLICATION_JSON)
-            .content("{\n" +
-                    "            \"phoneNumber\" : \"0400000000\",\n" +
-                    "            \"active\" : true\n" +
-                    "       }"
+            .content("""
+                {
+                    "phoneNumber" : "0400000000",
+                    "active" : true
+                }"""
             )).andExpect (status().isOk()).
                 andExpect(content().string("{\"phoneNumber\":\"0400000000\",\"active\":true}"));
     }

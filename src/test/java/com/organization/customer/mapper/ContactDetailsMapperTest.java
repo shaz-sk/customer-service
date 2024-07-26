@@ -22,7 +22,6 @@ import static org.mockito.Mockito.doReturn;
 public class ContactDetailsMapperTest {
 
     @InjectMocks
-    @Spy
     private ContactDetailsMapperImpl mapper;
 
     @Spy

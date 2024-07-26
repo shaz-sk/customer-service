@@ -18,7 +18,6 @@ import static org.mockito.Mockito.doReturn;
 @ExtendWith(MockitoExtension.class)
 public class PhoneServiceTest {
     @InjectMocks
-    @Spy
     private PhoneServiceImpl phoneService;
 
     @Spy

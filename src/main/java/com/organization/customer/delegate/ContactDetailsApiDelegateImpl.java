@@ -1,11 +1,11 @@
 package com.organization.customer.delegate;
 
-import com.organization.customer.exception.InvalidRequestException;
 import com.organization.customer.api.ContactDetailsApiDelegate;
-import com.organization.customer.dto.CustomerDto;
 import com.organization.customer.data.TestData;
-import com.organization.customer.mapper.CustomerMapper;
+import com.organization.customer.dto.CustomerDto;
+import com.organization.customer.exception.InvalidRequestException;
 import com.organization.customer.mapper.ContactDetailsMapper;
+import com.organization.customer.mapper.CustomerMapper;
 import com.organization.customer.models.ContactDetails;
 import com.organization.customer.models.Customer;
 import com.organization.customer.models.Phone;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -68,7 +68,7 @@ public class ContactDetailsApiDelegateImpl implements ContactDetailsApiDelegate 
 
     @Override
     public ResponseEntity<Phone> updatePhoneStatus(String firstName, Phone phoneNumber) {
-        CustomerDto customerDto = new CustomerDto(firstName, "", Arrays.asList(phoneNumber));
+        CustomerDto customerDto = new CustomerDto(firstName, "", List.of(phoneNumber));
         validate(phoneValidator, customerDto);
         return new ResponseEntity(phoneService.saveStatus(phoneNumber, firstName), HttpStatus.OK);
     }
@@ -87,8 +87,6 @@ public class ContactDetailsApiDelegateImpl implements ContactDetailsApiDelegate 
     }
 
     protected DataBinder newBinderInstance(final Object toValidate) {
-
-        final DataBinder binder = new DataBinder(toValidate);
-        return binder;
+        return new DataBinder(toValidate);
     }
 }

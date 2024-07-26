@@ -4,11 +4,9 @@ import com.organization.customer.models.Phone;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.boot.context.properties.ConstructorBinding;
 
 import java.util.List;
 
-@ConstructorBinding
 @Data
 @Getter
 @Setter
