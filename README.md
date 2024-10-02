@@ -1,11 +1,36 @@
-# Requirement
-In our database, we are storing phone numbers associated with customers and will provide an interface to manage it. Assume phone numbers as a static data structure. Develop API with the below capabilities.
+### Requirement
+In our database, we are storing phone numbers associated with customers and require an interface to manage it. Assume phone numbers as a static data structure.
 - Get all phone number
 - Get phone numbers of a single customer
 - activate a phone number
+- 
+#### Language
+- Java
 
-# Whats in the code
-1. Open API spec as per the requirements. Available src/main/resources/openapi.yaml.
+### Architectural decisions
+- Containerised application with Docker
+- API security using basic Spring security
+- Boiler plate code generation using swagger codegen
+
+### Which part are you most happy with?
+- Swagger codegen meant less code and tests to write and maintain and faster 
+- Spring security for authentication and authorization.
+- Mapstruct library does object to object transformation efficiently and results in less code.
+
+### Do differently
+- Add pagination for retrieving all customer data
+- Add Tracing, profile specific logging for prod and easy log access for support
+- Externalised error messages
+- Design with a customer id to get a customers details
+- Some naming improvement.
+- Use Java records instead of lombok library.
+- Earlier version of the code had more logic and dependencies in the delegate. Abstracted it away into a service
+- Earlier version of the code did not have access control. Any logged in user could get all phone numbers
+- Earlier version of the code saved password as plain text.
+
+
+### Whats in the code
+1. Open API spec. Available src/main/resources/openapi.yaml.
 2. Secure endpoint using basic Spring security.
 3. Actuator for health check and other details.
 4. Swagger codegen was used generate code including controller, delegate and models.
@@ -18,12 +43,7 @@ In our database, we are storing phone numbers associated with customers and will
 11. Added docker for consistency and portability.
 12. Validated GET requests based on authenticated user and PUT request based on the role of authenticated user.
 
-## Design considerations
-
-1. When admin retrieves of all phone numbers they would like to know the customer to whom those numbers belong.
-2. Need to design with a customer id to get a customers details.
-
-## To run
+### To run
 
 1. ```./gradlew bootRun.``` If you get access denied, run chmod 755 gradlew
 2. To get debug logs, in resources/application.properties, please set logging.level.com.belong.customer to DEBUG
@@ -53,11 +73,3 @@ In our database, we are storing phone numbers associated with customers and will
    ```docker-compose up --build```
 5. I have introduced lombok package, so Intellij may need this setup to avoid compilation error.
    Go to Inteiij Preferences > search for annotation processor and check enable annotationprocessing
-
-
-## What could have been done better?
-1. Add pagination for retrieving all customer data
-2. Add Tracing, profile specific logging for prod and easy log access for support
-3. Add more unit testing. Please refer PhoneValidatorTest, PhoneServiceTest as a sample
-4. Externalised error messages
-5. Linting

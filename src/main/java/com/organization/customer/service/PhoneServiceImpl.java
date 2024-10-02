@@ -22,7 +22,8 @@ public class PhoneServiceImpl implements PhoneService{
         Optional<CustomerDto> customer =
                 customerData.getCustomers().stream().filter( c -> c.getFirstName().equals(firstName)).findFirst();
         if(customer.isPresent()) {
-            Optional<Phone> phone = customer.get().getPhoneNumbers().stream().filter( p -> p.getPhoneNumber().equals(phoneNumber.getPhoneNumber())).findFirst();
+            Optional<Phone> phone = customer.get().getPhoneNumbers().stream()
+                .filter( p -> p.getPhoneNumber().equals(phoneNumber.getPhoneNumber())).findFirst();
             if(phone.isPresent()) {
                 phone.get().setActive(phoneNumber.getActive());
                 return phone.get();
