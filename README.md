@@ -3,7 +3,7 @@ In our database, we are storing phone numbers associated with customers and requ
 - Get all phone number
 - Get phone numbers of a single customer
 - activate a phone number
-- 
+
 #### Language
 - Java
 
@@ -20,12 +20,13 @@ In our database, we are storing phone numbers associated with customers and requ
 ### Do differently
 - Add pagination for retrieving all customer data
 - Add Tracing, profile specific logging for prod and easy log access for support
-- Externalised error messages
+- Externalise error messages
+- Add test reports for build
 - Design with a customer id to get a customers details
 - Some naming improvement.
 - Use Java records instead of lombok library.
 - Earlier version of the code had more logic and dependencies in the delegate. Abstracted it away into a service
-- Earlier version of the code did not have access control. Any logged in user could get all phone numbers
+- Earlier version of the code did not have access control for PUT
 - Earlier version of the code saved password as plain text.
 
 
